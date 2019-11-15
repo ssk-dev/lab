@@ -24,13 +24,18 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
+              { "glob": "**/*", "input": "src/assets/markdown/", "output": "/markdown/" },
+              { "glob": "tsconfig.json", "input": "", "output": "/" },
+              { "glob": "tslint.json", "input": "", "output": "/" },
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/marked/lib/marked.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,0 +1,20 @@
+<ng-template #file [ngForOf]="data | objectToArray:'values'" let-file let-i=index ngFor>
+  <div [id]="file.name + '-'+ index + '-'+i">
+    <div class="type {{file.type}}" (click)="log($event)">
+      <div [ngSwitch]="file.type">
+        <mat-icon *ngSwitchCase="'folder'">folder</mat-icon>
+        <mat-icon *ngSwitchCase="'file'">insert_drive_file</mat-icon>
+      </div>
+      <div class="file-name" [class.highlight]="!(file.description | matchSearch:searchInDescription)">
+        {{file.name}}
+        <span [innerHTML]="' - '+file.description | highlightSearch:searchInDescription"
+              class="file-description"></span>
+      </div>
+    </div>
+
+    <div *ngIf="file.sub" [id]="file.name + '-sub-' + index + '-'+i" class="sub">
+      <lab-file-tree-viewer [data]="file.sub" [index]="index"
+                            [searchInDescription]="searchInDescription"></lab-file-tree-viewer>
+    </div>
+  </div>
+</ng-template>

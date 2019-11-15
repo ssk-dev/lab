@@ -1,1 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+@import 'assets/scss/theme/colors';
+@import 'assets/scss/theme/theme';
+/**
+* Generated theme by Material Theme Generator
+* https://material-theme-generator.travetto.io
+*/
+@import '~@angular/material/theming';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@import 'assets/scss/theme/custom-mat-components';
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  //text-shadow: 1px 1px 1px black;
+  transition: color .3s ease-in-out, background-color .3s ease;
+}
+
+.space-even {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-button {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #fff;
+  border-radius: 81px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #000;
+}
+
+::-webkit-scrollbar-track {
+  background: #666;
+  border: 0px none #fff;
+  border-radius: 97px;
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #666;
+}
+
+::-webkit-scrollbar-track:active {
+  background: #333;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

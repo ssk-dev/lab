@@ -1,0 +1,103 @@
+// Specific component overrides, pieces that are not in line with the general theming
+// Handle buttons appropriately, with respect to line-height
+.mat-accent {
+  color: map-get($mat-accent, 'main')
+}
+
+.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+  padding: 0 1.15em;
+  margin: 0 .65em;
+  min-width: 3em;
+  line-height: 36.4px
+}
+
+.mat-standard-chip {
+  padding: .5em .85em;
+  min-height: 2.5em;
+}
+
+.mat-paginator {
+  display: flex;
+  background: transparent;
+}
+
+.mat-table {
+  width: 100%;
+
+  th.mat-header-cell,
+  td.mat-cell {
+    max-width: 300px;
+    padding: 14px;
+  }
+}
+
+mat-card.mat-card {
+  border-radius: 0;
+
+  img {
+    background: #2b2b2b;
+  }
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.light-theme {
+  transition: color .3s ease-in-out;
+
+  .mat-drawer-content {
+    background: #fff;
+    color: #333;
+    text-shadow: none;
+  }
+
+  mat-card.mat-card img {
+    background: #f1f1f1;
+  }
+
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  lab-table .search-bar,
+  lab-table .mat-paginator {
+    background: #f7f7f7;
+  }
+
+  lab-terminal {
+    text-shadow: none;
+
+    .terminal {
+      background-color: inherit;
+
+      pre {
+        color: #4e4e4e;
+      }
+    }
+
+    .terminal-header {
+      background: #f1f1f1;
+
+      .filename {
+        color: #4e4e4e;
+      }
+    }
+
+    .code-lines {
+      background: #f9f9f9;
+      color: #5a5a5a;
+    }
+  }
+
+  .file-name {
+    &.highlight {
+      color: #333;
+    }
+
+    &:hover > .file-description {
+      color: #3c3c3c !important;
+    }
+  }
+}
+

@@ -1,0 +1,116 @@
+@import './../../../assets/scss/theme/colors';
+
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-shadow: 1px 1px 1px black;
+}
+
+.terminal {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-background;
+  margin: 8px;
+  min-width: 450px;
+  position: relative;
+  overflow: hidden;
+  color: $light-gray;
+
+  pre {
+    margin: 0;
+    display: flex;
+  }
+}
+
+.terminal-header {
+  align-items: center;
+  background: $color-header-background;
+  display: flex;
+  height: 32px;
+  justify-content: space-between;
+  overflow: hidden;
+  padding-left: 54px;
+  padding-right: 5px;
+  color: $light-gray;
+}
+
+.terminal-header::before {
+  color: $light-gray;
+  content: '\2022 \2022 \2022';
+  font-size: 22px;
+  left: 14px;
+  position: absolute;
+}
+
+.hidden {
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
+  border: none;
+  background: none;
+  color: white;
+  font-family: inherit;
+  width: 100%;
+}
+
+.code-type--notice {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: #555;
+  font-size: 12px;
+}
+
+.code-block {
+  display: flex;
+  font-size: 14px;
+  line-height: 16px;
+  overflow: hidden;
+  padding: 1rem;
+  max-height: 400px;
+
+  .code {
+    display: block;
+  }
+}
+
+.code-lines {
+  font-size: 14px;
+  line-height: 16px;
+  background: #2d2d2d;
+  color: #8c8b8b;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  max-height: 400px;
+}
+
+.expand {
+  max-height: none;
+}
+
+.collapsed {
+  -webkit-mask: -webkit-gradient(linear, left 50%, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)))
+}
+
+::ng-deep.hljs {
+
+  .hljs-attr {
+    color: #9876aa;
+  }
+
+  .hljs-string {
+    color: #55864a;
+  }
+
+  .hljs-number {
+    color: #4a85ba;
+  }
+
+  .hljs-literal {
+    color: #cc7832;
+  }
+}

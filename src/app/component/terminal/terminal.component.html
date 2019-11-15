@@ -1,0 +1,24 @@
+<div class="terminal mat-elevation-z8">
+  <div class="terminal-header">
+    <div *ngIf="filename" class="filename">{{filename}}</div>
+    <div>
+      <button (click)="collapsed = !collapsed" *ngIf="isCollapsible" aria-label="expand/collapse"
+              mat-icon-button>
+        <mat-icon>unfold_more</mat-icon>
+      </button>
+      <lab-copy-to-clipboard [copy]="code"></lab-copy-to-clipboard>
+    </div>
+  </div>
+  <div class="code-type--notice">{{codeInformation}}</div>
+  <div #codeSection style="display: flex;">
+    <div [ngClass]="collapsed ? 'collapsed': 'expand'" *ngIf="lines.length > 0" class="code-lines">
+      <ng-template [ngForOf]="lines" class="code-lines" let-i="index" let-line ngFor>
+        <span>{{line}}</span>
+      </ng-template>
+    </div>
+    <div [ngClass]="collapsed ? 'collapsed': 'expand'" class="code-block">
+      <pre><code [highlight]="code" class="code {{type}}"></code></pre>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

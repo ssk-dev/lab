@@ -1,0 +1,19 @@
+<mat-card class="mat-elevation-z8">
+  <!--  <mat-card-header>-->
+  <!--    <div mat-card-avatar class="example-header-image"></div>-->
+  <!--    <mat-card-title>Angular</mat-card-title>-->
+  <!--    <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+  <!--  </mat-card-header>-->
+  <img alt="Photo of a Shiba Inu" mat-card-image
+       [src]="logo">
+  <mat-card-content>
+    <ol>
+      <ng-template [ngForOf]="navEntries" let-entry ngFor>
+        <li>
+          <a [class.active]="entry === fragment" [fragment]="entry" [routerLink]="['./']"
+             class="mat-accent">{{entry | convertToTitle}}</a>
+        </li>
+      </ng-template>
+    </ol>
+  </mat-card-content>
+</mat-card>

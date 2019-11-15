@@ -1,0 +1,69 @@
+<lab-page [mainSection]="mainSection"
+          logo="https://unitejs.com/assets/logos/tslint.png"></lab-page>
+
+<ng-template #mainSection>
+  <lab-section id="installation">
+    <h2>Install TsLint</h2>
+    https://www.npmjs.com/package/tslint
+    <p>TsLint <a class="mat-accent" href="https://www.npmjs.com/package/tslint" target="_blank">https://www.npmjs.com/package/tslint</a>
+    </p>
+    <lab-terminal code="npm i tslint --save"></lab-terminal>
+    <p>RxJs Linting <a class="mat-accent" href="https://github.com/cartant/rxjs-tslint-rules" target="_blank">https://github.com/cartant/rxjs-tslint-rules</a>
+    </p>
+    <lab-terminal code="npm install rxjs-tslint-rules --save-dev"></lab-terminal>
+    <p>TsLint for React <a class="mat-accent" href="https://github.com/palantir/tslint-react" target="_blank">https://github.com/palantir/tslint-react</a>
+    </p>
+    <lab-terminal code="npm install tslint-react --save-dev"></lab-terminal>
+  </lab-section>
+
+  <lab-section id="configuration">
+    <h2>TypeScript Linting with TS Lint</h2>
+    <p>First of all you have to extend 2 files. Both files are located under root.</p>
+    <div class="space-even">
+      <lab-code *ngIf="tsconfigFileLoaded" [code]="tsconfig.code" [comment]="tsconfig.name"
+                [type]="tsconfig.type"></lab-code>
+      <lab-code *ngIf="tslintFileLoaded" [code]="tslint.code" [comment]="tslint.name" [type]="tslint.type"></lab-code>
+    </div>
+    <p>If you use multiple linting tools you can extend these by adding it in {{tslint.name}}</p>
+    <lab-code [code]="tslintExtends"></lab-code>
+  </lab-section>
+
+  <lab-section id="flags">
+    <h2>TSLint rule flags</h2>
+    <b>Comment flags in source code</b>
+    <p>In addition to global configuration, you may also enable/disable linting for a subset of lint rules within a
+      file
+      with the following comment rule flags:</p>
+    <ul>
+      <li>/* tslint:disable */ - Disable all rules for the rest of the file</li>
+      <li>/* tslint:enable */ - Enable all rules for the rest of the file</li>
+      <li>/* tslint:disable:rule1 rule2 rule3... */ - Disable the listed rules for the rest of the file</li>
+      <li>/* tslint:enable:rule1 rule2 rule3... */ - Enable the listed rules for the rest of the file</li>
+      <li>// tslint:disable-next-line - Disables all rules for the following line</li>
+      <li>someCode(); // tslint:disable-line - Disables all rules for the current line</li>
+      <li>// tslint:disable-next-line:rule1 rule2 rule3... - Disables the listed rules for the next line</li>
+    </ul>
+    <p>Rules flags enable or disable rules as they are parsed. Disabling an already disabled rule or enabling an
+      already
+      enabled rule has no effect. Enabling a rule that is not present or disabled in tslint.json has also no
+      effect.</p>
+    <p>
+      For example, imagine the directive /* tslint:disable */ on the first line of a file, /* tslint:enable:ban
+      class-name
+      */ on the 10th line and /* tslint:enable */ on the 20th. No rules will be checked between the 1st and 10th
+      lines,
+      only the ban and class-name rules will be checked between the 10th and 20th, and all rules will be checked for
+      the
+      remainder of the file.
+    </p>
+    <b>Here’s an example:</b>
+    <lab-code [code]="tslintFlags.code" [comment]="tslintFlags.name" [type]="tslintFlags.type"></lab-code>
+  </lab-section>
+
+  <lab-section id="rules">
+    <h2>TsLint Rules</h2>
+    <p>Full TsLint documentation under <a class="mat-accent" href="https://palantir.github.io/tslint/rules/"
+                                          target="_blank">https://palantir.github.io/tslint/rules/</a></p>
+    <lab-table [data]="tableData" [displayedColumns]="tableColumns" [pagination]="true" [sortable]="true"></lab-table>
+  </lab-section>
+</ng-template>

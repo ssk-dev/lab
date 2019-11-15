@@ -1,0 +1,6 @@
+<div [ngClass]="noteType | lowercase">
+  <div [ngSwitch]="noteType">
+    <div *ngSwitchCase="noteTypeEnum.Note">Note</div>
+  </div>
+  <ng-content></ng-content>
+</div>

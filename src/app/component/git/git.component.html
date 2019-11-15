@@ -1,0 +1,314 @@
+<lab-page [mainSection]="mainSection"
+          logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Git-logo-black.svg/800px-Git-logo-black.svg.png"></lab-page>
+
+<ng-template #mainSection>
+
+  <lab-section id="installation">
+    <h2>Install Git</h2>
+    <blockquote><b>Windows only</b>. Is already installed on linux.</blockquote>
+    <ol>
+      <li>Download from here: <a class="mat-accent" href="https://git-scm.com/download/" target="_blank">https://git-scm.com/download/</a>
+      </li>
+      <li>Follow the instructions.</li>
+      <li>Suggested setup options:</li>
+      <ul>
+        <li>Additional Icons -> On the Desktop <br>
+          Windows Explorer integration -> Git Bash Here <br>
+          Windows Explorer integration ->Git GUI Here
+        </li>
+        <li>Use Git from Git Bash only</li>
+        <li>Use the OpenSSL library</li>
+        <li>Checkout Windows-style, commit Unix-style line endings</li>
+        <li>Use MinTTY</li>
+      </ul>
+    </ol>
+  </lab-section>
+
+  <lab-section id="conventions">
+    <h2 id="branch-naming">Branch/Commit name conventions</h2>
+    Must be prefix by one of the following:
+    <lab-table [data]="tableData" [displayedColumns]="columnName"></lab-table>
+    <lab-terminal [code]="branchNamingCodeExample"></lab-terminal>
+    <lab-notice>Each partial change have to be a single commit.</lab-notice>
+    <table>
+      <thead>
+      <tr>
+        <th>Branch Name</th>
+        <th>Example</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>master</td>
+        <td>master</td>
+        <td>Main development branch. Direct push on master is not allowed, only via Bitbucket Pull-Requests.</td>
+      </tr>
+      <tr>
+        <td>feature/login/feature id_description</td>
+        <td>feature/lemo7242/MIB3-123_break_all_the_things</td>
+        <td>Branch containing new changes to the code, completely seperate from master. Should be created for each
+          feature, and deleted after the changes are merged.
+        </td>
+      </tr>
+      <tr>
+        <td>release/&lt;release_name&gt;</td>
+        <td>release/31.7</td>
+        <td>The release branch is the equivalent of CopyUp(int/main) as used in previous projects.<br>This branch is
+          <strong>temporaray</strong>, and will be deleted after the delivery is made.
+        </td>
+      </tr>
+      <tr>
+        <td>stabi/&lt;release_name&gt;</td>
+        <td>stabi/31.7</td>
+        <td>Like release, but does not yet contain the changes to support the newest framework.</td>
+      </tr>
+      </tbody>
+    </table>
+  </lab-section>
+
+  <lab-section id="branch-flow">
+    <h2>Basic Feature Flow</h2>
+    <p>For feature development use the following best practices:</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Action</th>
+        <th>Commands</th>
+        <th>Explanation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1. Create and push a feature branch</td>
+        <td><code>git checkout -b feature/&lt;user&gt;/mib3-&lt;ID&gt;_break_all_the_things</code></td>
+        <td>Creates a new branch with the specified name (<code>-b</code> part), and changes to the new branch (<code>checkout</code>
+          part).
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git push -u</code></td>
+        <td>Pushes your local feature branch to the server, creating a new branch with the new name there, and linking
+          the
+          two.
+        </td>
+      </tr>
+      <tr>
+        <td>2. Implement</td>
+        <td>*make changes*</td>
+        <td>Do all the things! <code>git status</code> will show you the files you changed/added in red.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git add .</code></td>
+        <td>Marks all new and changed files to be in the next commit. You can also add files individually like <code>git
+          add my_new_file.txt</code>.
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git commit -m "my fancy commit message"</code></td>
+        <td>Creates a commit with all the files you've <code>git add</code>ed before.<br>Your repo might now look
+          something like:<br><strong> o----o----o----o&nbsp;&nbsp;&nbsp;master<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o----o----o&nbsp;&nbsp;&nbsp;feature</strong>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Or both at once: <code>git commit -am "my fancy commit message"</code></td>
+        <td>Note that this does not add new files.</td>
+      </tr>
+      <tr>
+        <td>3. Interactive rebase on master*</td>
+        <td><code>git fetch origin</code></td>
+        <td>Pull latest changes from the remote.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git rebase -i origin/master</code></td>
+        <td>Start interactive rebase. An editor will open with a description of what you can do. Save an close to apply.
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><em>fix conflicts</em></td>
+        <td>TODO: More details please</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git push -f</code></td>
+        <td>Because you changed the history of you branch, you now have to overwrite your remote feature branch.</td>
+      </tr>
+      <tr>
+        <td>4. Create a pull-request</td>
+        <td>Open [bitbucket][] to your repo and klick [create branch]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>OR: Click the 'Create pull request for ...' link in the console after pushing.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>OR: Use git-pr like this <code>git pr master</code></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>5. Add more changes</td>
+        <td><code>git commit --amend</code> or go back to <strong>2. Implement</strong>.</td>
+        <td>Amend adds changes to an existing commit. Carefull though, it is better to add more commits and rebase again
+          later.
+        </td>
+      </tr>
+      <tr>
+        <td>6. Review &amp; merge</td>
+        <td>Use bitbucket to review and merge</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>7. Remove branch</td>
+        <td><code>git checkout master</code></td>
+        <td>Change to another branch so you can remote it</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git branch --delete feature/&lt;user&gt;/mib3-&lt;ID&gt;_break_all_the_things</code></td>
+        <td>Delete your branch</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git push --delete origin feature/&lt;user&gt;/mib3-&lt;ID&gt;_break_all_the_things</code></td>
+        <td>Delete the remote branch. If you've already deleted the branch in Bitbucket, a <code>git fetch
+          --prune</code>
+          updates your local list.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h2 id="frequent-commands-overview">Frequent commands overview</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Group</th>
+        <th>Commands</th>
+        <th>Explanation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Current status</td>
+        <td><code>git status</code></td>
+        <td>Shows you the status. It lists changed files, new files (both in red), and the things to be commited (in
+          green).
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git diff</code></td>
+        <td>Shows you which lines inside the files are changed since the last commit. Red are the lines removed, green
+          are
+          the ones added.
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git diff path/to/file.txt</code></td>
+        <td>Same as above, but for a specific file only (supports wildcard paths).</td>
+      </tr>
+      <tr>
+        <td>Server communication</td>
+        <td><code>git pull</code></td>
+        <td>Get the latests changes from the remote, and update your local branch.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git fetch --prune</code></td>
+        <td>Get the latests changes from the remote, removing any deleted items.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git push -u</code></td>
+        <td>Push the local branch to the server, linking the local and remote branches together.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git rebase \&lt;branch_name\&gt;</code></td>
+        <td>If a git-pull gives you new changes on master, use rebasing to re-applies your commits on top of the new
+          commits.
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git rebase -i \&lt;branch_name\&gt;</code></td>
+        <td>Does the same as normal rebase, but lets you choose what to do with each commit.</td>
+      </tr>
+      <tr>
+        <td>Commiting</td>
+        <td><code>git add .</code></td>
+        <td>Mark all new and changed files to be in the next commit.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git add file.txt</code></td>
+        <td>Mark the one file to be in the next commit.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git reset</code></td>
+        <td>Reset markings you did by the adding above.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git commit</code></td>
+        <td>Commit the marked changes, opening an editor for the message. <code>-a</code> adds all (except for new) and
+          <code>-m "message"</code> adds a message without the editor.
+        </td>
+      </tr>
+      <tr>
+        <td>Branching</td>
+        <td><code>git branch \&lt;branch_name\&gt;</code></td>
+        <td>Create a new branch with the specified name. See above for naming conventions.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git checkout \&lt;branch_name\&gt;</code></td>
+        <td>Switch to an existing branch.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git checkout -b \&lt;branch_name\&gt;</code></td>
+        <td>Create a new branch like above, but switch to it imidiately. See above for naming conventions.</td>
+      </tr>
+      <tr>
+        <td>Undoing changes</td>
+        <td><code>git checkout .</code></td>
+        <td><strong>Carefull!</strong> Reset all local files to their last commited state.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git checkout path/to/file.txt</code></td>
+        <td><strong>Carefull!</strong> Reset one local file to its last commited state.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git checkout \&lt;branch_name\&gt; -- path/to/file.txt</code></td>
+        <td><strong>Carefull!</strong> Reset one local file to the state of the specified branch.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>git reset --hard</code></td>
+        <td><strong>Carefull!</strong> Same as <code>git checkout .</code>, but also moves the head if a branch/commit
+          is
+          specified.
+        </td>
+      </tr>
+      <tr>
+        <td>Undoing commits</td>
+        <td><code>git revert \&lt;commit_hash\&gt;</code></td>
+        <td>Create a new commit that applies the oposite changes from the specified commit.</td>
+      </tr>
+      </tbody>
+    </table>
+  </lab-section>
+</ng-template>

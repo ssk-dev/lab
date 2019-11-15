@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.type {
+  display: flex;
+  flex-direction: row;
+
+  &.file {
+    color: #00a7ff;
+  }
+
+  &.folder {
+    color: orange;
+  }
+}
+
+.sub {
+  padding-left: 1rem;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.file-name {
+  &:hover > .file-description{
+    color: white;
+    transition: all 0.3s ease-out;
+  }
+}
+
+.file-description {
+  color: gray;
+}
+
+mat-icon {
+  font-size: 16px;
+  height: unset;
+}
+
+.highlight {
+  color: white;
+}

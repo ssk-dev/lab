@@ -1,0 +1,8 @@
+<div class="content-section" #pageSection>
+<ng-container [ngTemplateOutlet]="mainSection"></ng-container>
+</div>
+<div class="sidebar-section">
+  <lab-nav-side [navEntries]="sidebarEntries" [logo]="logo"></lab-nav-side>
+
+  <ng-container [ngTemplateOutlet]="sidebarSection"></ng-container>
+</div>

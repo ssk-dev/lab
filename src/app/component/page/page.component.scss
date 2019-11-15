@@ -1,0 +1,22 @@
+@import '../../../assets/scss/theme/dimensions';
+
+:host {
+  display: flex;
+  padding: 20px;
+}
+
+.content-section {
+  height: $content-height;
+  overflow-x: hidden;
+  padding-right: $padding;
+}
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  height: $content-height;
+  overflow-x: hidden;
+  padding-left: $padding;
+  width: 700px;
+}
+

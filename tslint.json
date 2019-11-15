@@ -3,11 +3,29 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "ban-ts-ignore": true,
+    "ban-types": [
+      true,
+      [
+        "Object",
+        "Use {} instead."
+      ],
+      [
+        "String",
+        "Use string instead."
+      ]
+    ],
+    "component-class-suffix": true,
+    "component-selector": [
+      true,
+      "element",
+      "lab",
+      "kebab-case"
+    ],
+    "contextual-lifecycle": true,
     "deprecation": {
       "severity": "warning"
     },
-    "component-class-suffix": true,
-    "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "directive-selector": [
       true,
@@ -15,23 +33,25 @@
       "lab",
       "camelCase"
     ],
-    "component-selector": [
-      true,
-      "element",
-      "lab",
-      "kebab-case"
-    ],
     "import-blacklist": [
       true,
       "rxjs/Rx"
     ],
-    "interface-name": false,
-    "max-classes-per-file": false,
+    "interface-name": true,
+    "max-classes-per-file": [
+      true,
+      2
+    ],
     "max-line-length": [
       true,
-      140
+      {
+        "check-regex": true,
+        "check-strings": true,
+        "ignore-pattern": "^import |^export {(.*?)}",
+        "limit": 140
+      }
     ],
-    "member-access": false,
+    "member-access": true,
     "member-ordering": [
       true,
       {
@@ -43,46 +63,80 @@
         ]
       }
     ],
+    "no-any": [
+      true
+    ],
+    "no-conflicting-lifecycle": true,
     "no-consecutive-blank-lines": false,
-    "no-console": [
-      true,
-      "debug",
-      "info",
-      "time",
-      "timeEnd",
-      "trace"
-    ],
-    "no-empty": false,
+    "no-console": {
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ],
+      "severity": "error"
+    },
+    "no-empty": true,
+    "no-host-metadata-property": true,
     "no-inferrable-types": [
-      true,
-      "ignore-params"
+      false,
+      "ignore-params",
+      "ignore-properties"
     ],
+    "no-input-rename": true,
+    "no-inputs-metadata-property": true,
     "no-non-null-assertion": true,
+    "no-output-native": true,
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
+    "no-outputs-metadata-property": true,
+    "no-parameter-reassignment": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-use-before-declare": true,
-    "no-var-requires": false,
+    "no-var-requires": true,
     "object-literal-key-quotes": [
       true,
       "as-needed"
     ],
     "object-literal-sort-keys": false,
+    "only-arrow-functions": true,
     "ordered-imports": false,
+    "prefer-switch": [
+      true,
+      {
+        "min-cases": 3
+      }
+    ],
     "quotemark": [
       true,
       "single"
     ],
-    "trailing-comma": false,
-    "no-conflicting-lifecycle": true,
-    "no-host-metadata-property": true,
-    "no-input-rename": true,
-    "no-inputs-metadata-property": true,
-    "no-output-native": true,
-    "no-output-on-prefix": true,
-    "no-output-rename": true,
-    "no-outputs-metadata-property": true,
+    "return-undefined": false,
+    "space-within-parens": true,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
+    "trailing-comma": false,
+    "typedef": [
+      true,
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring"
+    ],
+    "unnecessary-constructor": [
+      true,
+      {
+        "check-super-calls": true
+      }
+    ],
+    "unnecessary-else": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true
   },

@@ -1,0 +1,142 @@
+<lab-page [mainSection]="mainSection" [sidebarSection]="sidebarSection"
+          logo="https://fewclicks.io/wp-content/uploads/2017/08/tool-logo-angular.png"></lab-page>
+
+<ng-template #mainSection>
+  <lab-section id="overview">
+    <h2>Overview</h2>
+    <p><a class="mat-accent" href="https://angular.io/start" target="_blank">https://angular.io/start</a></p>
+  </lab-section>
+
+  <lab-section id="getting-started">
+    <h2>Getting started</h2>
+    <ol>
+      <li><strong>Install the Angular CLI</strong>
+        <p>
+          You use the Angular CLI to create projects, generate application and library code, and perform a variety of
+          ongoing development tasks such as testing, bundling, and deployment.
+          <br>
+          Install the Angular CLI globally.
+          <br>
+          To install the CLI using npm, open a terminal/console window and enter the following command:
+          <lab-terminal code="npm install -g @angular/cli"></lab-terminal>
+        </p>
+      </li>
+      <li><strong>Create a workspace and initial application</strong>
+        <p>Run the CLI command ng new and provide the name my-app, as shown here:
+          <lab-terminal code="ng new my-app"></lab-terminal>
+          You can add specific options to CLI command
+          <a [href]="'https://angular.io/cli/generate#'+ angularGenerateTypesEnum.application" class="mat-accent"
+             target="_blank">{{'https://angular.io/cli/generate#' + angularGenerateTypesEnum.application}}</a><br>
+          <lab-terminal code="ng new my-app --prefix=lab --style=scss --routing=true"></lab-terminal>
+          The ng new command prompts you for information about features to include in the initial app. Accept the
+          defaults
+          by pressing the Enter or Return key.
+          <br>
+          <strong>The Angular CLI installs the necessary Angular npm packages and other dependencies. This can take a
+            few
+            minutes.</strong>
+          <br>
+          The CLI creates a new workspace and a simple Welcome app, ready to run.
+        </p>
+      </li>
+      <li>
+        <strong>Run the application</strong>
+        <p>
+          The Angular CLI includes a server, so that you can easily build and serve your app locally.
+          <br>
+          Go to the workspace folder (my-app) by CLI.
+          <br>
+          Launch the server by using the CLI command ng serve, with the --open option.
+          <lab-terminal code="cd my-app && ng serve --open"></lab-terminal>
+          The ng serve command launches the server, watches your files, and rebuilds the app as you make changes to
+          those
+          files.
+
+          The --open (or just -o) option automatically opens your browser to http://localhost:4200/.
+        </p>
+      </li>
+    </ol>
+  </lab-section>
+
+  <lab-section id="file-structure">
+    <h2>File structure</h2>
+    <mat-form-field>
+      <input (input)="applyFilter($event.target.value)" autocomplete="off" matInput placeholder="Search" type="text">
+    </mat-form-field>
+    <lab-terminal>
+      <lab-file-tree-viewer [data]="fileStructure" [searchInDescription]="searchInDescription"></lab-file-tree-viewer>
+    </lab-terminal>
+  </lab-section>
+
+  <lab-section id="generate">
+    <h2>Generate files</h2>
+    <p>One of the cool features of Angular is to generate file depends on schematic automatic.</p>
+    <div class="space-even">
+      <form [formGroup]="typeAndNameFormGroup" autocomplete="off">
+        <ng-template>Type & Name</ng-template>
+        <mat-form-field>
+          <mat-label>Type to generate</mat-label>
+          <mat-select [(value)]="selectedGenerateType">
+            <mat-option *ngFor="let type of angularGenerateTypesArray" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input #name (input)="componentName = name.value" formControlName="name" matInput
+                 placeholder="{{selectedGenerateType}} name" required>
+          <mat-hint>Should be kebab-case</mat-hint>
+        </mat-form-field>
+        <p>
+          You can also add specific options to CLI command. See documentation
+          <a [href]="'https://angular.io/cli/generate#'+ selectedGenerateType | lowercase" class="mat-accent"
+             target="_blank">{{'https://angular.io/cli/generate#' + selectedGenerateType | lowercase}}</a>
+        </p>
+      </form>
+
+      <div [ngSwitch]="selectedGenerateType">
+        <lab-terminal *ngSwitchCase="angularGenerateTypesEnum.component"
+                      code="ng g {{angularGenerateTypesEnum.component}} {{angularGenerateTypesEnum.component}}s/{{componentName | convertStringToCase:'kebab-case' }}"></lab-terminal>
+        <lab-terminal *ngSwitchCase="angularGenerateTypesEnum.class"
+                      code="ng g {{angularGenerateTypesEnum.class}} {{angularGenerateTypesEnum.class}}es/{{componentName}}"></lab-terminal>
+      </div>
+    </div>
+  </lab-section>
+</ng-template>
+
+<ng-template #sidebarSection>
+  <lab-sidebar-widget>
+    <h2>Generate files</h2>
+    <p>One of the cool features of Angular is to generate file depends on schematic automatic.</p>
+    <div>
+      <form [formGroup]="typeAndNameFormGroup" autocomplete="off" class="space-even">
+        <mat-form-field>
+          <mat-label>Type to generate</mat-label>
+          <mat-select [(value)]="selectedGenerateType">
+            <mat-option *ngFor="let type of angularGenerateTypesArray" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input #name (input)="componentName = name.value" formControlName="name" matInput
+                 placeholder="{{selectedGenerateType}} name" required>
+          <mat-hint>Should be kebab-case</mat-hint>
+        </mat-form-field>
+      </form>
+
+      <p>
+        You can also add specific options to CLI command. See documentation
+        <a [href]="'https://angular.io/cli/generate#'+ selectedGenerateType | lowercase" class="mat-accent"
+           target="_blank">{{'https://angular.io/cli/generate#' + selectedGenerateType | lowercase}}</a>
+      </p>
+
+      <div [ngSwitch]="selectedGenerateType">
+        <lab-terminal *ngSwitchCase="angularGenerateTypesEnum.component"
+                      code="ng g {{angularGenerateTypesEnum.component}} {{angularGenerateTypesEnum.component}}s/{{componentName | convertStringToCase:'kebab-case' }}"></lab-terminal>
+        <lab-terminal *ngSwitchCase="angularGenerateTypesEnum.class"
+                      code="ng g {{angularGenerateTypesEnum.class}} {{angularGenerateTypesEnum.class}}es/{{componentName}}"></lab-terminal>
+      </div>
+    </div>
+  </lab-sidebar-widget>
+</ng-template>
